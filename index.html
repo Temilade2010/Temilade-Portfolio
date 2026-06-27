@@ -1,414 +1,331 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atunde Temilade - Fullstack Developer</title>
-    <meta name="description" content="Atunde Temilade - Professional Frontend Developer specializing in modern web development and user experience design.">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Atunde Temilade — Fullstack Developer</title>
+  <meta name="description" content="Atunde Temilade — Fullstack/Frontend Developer building accessible, performant web apps.">
+  <link rel="canonical" href="https://temilade-portfolio.example.com/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Atunde Temilade — Fullstack Developer">
+  <meta property="og:description" content="Building accessible, performant web apps with a focus on user experience.">
+  <meta property="og:url" content="https://temilade-portfolio.example.com/">
+  <meta property="og:image" content="https://images.example.com/temilade-hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Atunde Temilade — Fullstack Developer">
+  <meta name="twitter:description" content="Building accessible, performant web apps with a focus on user experience.">
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicons (add your icon files to /assets) -->
+  <link rel="icon" href="/assets/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Font Awesome (optional, consider replacing with inline SVGs for perf) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Atunde Temilade",
+    "url": "https://temilade-portfolio.example.com",
+    "sameAs": [
+      "https://github.com/Temilade2010",
+      "https://www.linkedin.com/in/temilade2010"
+    ],
+    "jobTitle": "Fullstack Developer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Self-employed"
+    }
+  }
+  </script>
+
+  <style>
+    /* Minimal inline styles for improved default rendering (move to styles.css) */
+    :root { --bg: #fff; --text: #111; --accent: #0066ff; font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    [data-theme="dark"] { --bg: #0b0c0f; --text: #e6eef8; --accent: #58a6ff; }
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:1rem}
+    .navbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+    .nav-links{display:flex;gap:1rem}
+    .nav-toggle{display:none}
+    /* Responsive */
+    @media (max-width:800px){
+      .nav-links{display:none}
+      .nav-toggle{display:block}
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">Atunde Temilade</a>
-            </div>
-            
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-            
-            <div class="nav-toggle" id="nav-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+  <!-- Skip link for accessibility -->
+  <a class="skip-link" href="#main" style="position:absolute;left:-999px;top:auto;background:#000;color:#fff;padding:.5rem;z-index:1000;">Skip to content</a>
 
+  <!-- Navigation -->
+  <header class="navbar" role="banner" aria-label="Main navigation">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between">
+      <a class="nav-logo" href="#home" aria-label="Go to home">Atunde Temilade</a>
+
+      <nav class="nav" aria-label="Primary">
+        <button id="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" class="nav-toggle" aria-label="Toggle menu">
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
+
+        <ul id="primary-navigation" class="nav-links" role="menubar" style="list-style:none;margin:0;padding:0;display:flex;gap:1rem;align-items:center">
+          <li role="none"><a role="menuitem" class="nav-link" href="#home">Home</a></li>
+          <li role="none"><a role="menuitem" class="nav-link" href="#about">About</a></li>
+          <li role="none"><a role="menuitem" class="nav-link" href="#projects">Projects</a></li>
+          <li role="none"><a role="menuitem" class="nav-link" href="#contact">Contact</a></li>
+          <li role="none">
+            <button id="theme-toggle" aria-pressed="false" title="Toggle dark mode" style="background:none;border:0;cursor:pointer;">
+              <i id="theme-icon" class="fas fa-moon" aria-hidden="true"></i>
+              <span class="sr-only">Toggle color theme</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        Hi, I'm <span class="highlight">Atunde Temilade</span>
-                    </h1>
-                    <p class="hero-subtitle typewriter" id="typewriter">FUllstackl Developer</p>
-                    <p class="hero-description">
-                        I create beautiful, responsive web experiences that engage users and drive results. 
-                        Passionate about clean code and modern design principles.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="https://images.app.goo.gl/7ww4NQscep4FmDQ26" alt="Atunde Temilade - Professional Portrait" loading="lazy">
-                </div>
-            </div>
+    <section id="home" class="hero" aria-labelledby="hero-title" style="padding:2rem 0">
+      <div class="container" style="display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:center">
+        <div>
+          <h1 id="hero-title" class="hero-title" style="margin:0 0 .5rem 0;font-size:2rem">Hi, I'm <span class="highlight">Atunde Temilade</span></h1>
+          <p class="hero-subtitle" style="font-weight:600;margin:.25rem 0;color:var(--accent)">
+            <span id="typewriter" aria-live="polite">Fullstack Developer</span>
+          </p>
+          <p style="margin:.75rem 0 1rem">I build accessible, responsive web applications and APIs. I focus on clean code, performance, and user experience.</p>
+          <div style="display:flex;gap:.75rem">
+            <a class="btn btn-primary" href="#projects">View my work</a>
+            <a class="btn" href="#contact">Get in touch</a>
+          </div>
         </div>
-        <div class="scroll-indicator">
-            <a href="#about" class="scroll-down">
-                <i class="fas fa-chevron-down"></i>
-            </a>
+
+        <div style="display:flex;justify-content:center">
+          <!-- Use picture and responsive images; replace with your optimized assets -->
+          <picture>
+            <source srcset="/assets/temilade-portrait-800.webp" type="image/webp">
+            <img src="/assets/temilade-portrait-400.jpg" alt="Portrait of Atunde Temilade" style="width:100%;border-radius:8px;object-fit:cover" loading="lazy" width="360" height="360">
+          </picture>
         </div>
+      </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <p class="section-subtitle">Get to know me better</p>
-            </div>
-            
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="about-description">
-                        <p>
-                            I'm a passionate Frontend Developer with a keen eye for design and a love for creating 
-                            seamless user experiences. With expertise in modern web technologies, I transform ideas 
-                            into beautiful, functional websites that make a lasting impact.
-                        </p>
-                        <p>
-                            My journey in web development began with a fascination for how code can bring designs to life. 
-                            I specialize in responsive design, performance optimization, and creating accessible web 
-                            applications that work flawlessly across all devices.
-                        </p>
-                        <p>
-                            When I'm not coding, you'll find me exploring new technologies, contributing to open-source 
-                            projects, or sharing my knowledge with the developer community.
-                        </p>
-                    </div>
-                    
-                    <div class="skills">
-                        <h3>Skills & Technologies</h3>
-                        <div class="skills-grid">
-                            <div class="skill-item">
-                                <i class="fab fa-html5"></i>
-                                <span>HTML5</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-css3-alt"></i>
-                                <span>CSS3</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-js-square"></i>
-                                <span>JavaScript</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-react"></i>
-                                <span>React</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-node-js"></i>
-                                <span>Node.js</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fab fa-git-alt"></i>
-                                <span>Git</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Responsive Design</span>
-                            </div>
-                            <div class="skill-item">
-                                <i class="fas fa-universal-access"></i>
-                                <span>Accessibility</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="about-image">
-                    <img src="https://pixabay.com/get/gf97c9aefba66d2fda5ffc0f5648f8c0bd43650c98dc69fa5fd747eea4c9b63f2536b978298bc64f909131cf8e2366995b832b232b01c2c5b27b8c100f7810967_1280.jpg" alt="Atunde Temilade - About Photo" loading="lazy">
-                </div>
-            </div>
+    <!-- About -->
+    <section id="about" class="about" aria-labelledby="about-title" style="padding:2rem 0">
+      <div class="container">
+        <header class="section-header">
+          <h2 id="about-title">About Me</h2>
+          <p>Get to know me better</p>
+        </header>
+
+        <div class="about-grid" style="display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start">
+          <div>
+            <p>I'm a Fullstack Developer with a keen eye for design and a passion for building accessible, performant user experiences. I work across the stack — frontend interfaces, backend APIs, and deployment.</p>
+
+            <h3>Skills & technologies</h3>
+            <ul style="display:flex;flex-wrap:wrap;gap:.5rem;padding:0;list-style:none">
+              <li><strong>Frontend:</strong> HTML, CSS, JavaScript, React, Vue</li>
+              <li><strong>Backend:</strong> Node.js, Express, REST/GraphQL</li>
+              <li><strong>Storage:</strong> MongoDB, PostgreSQL</li>
+              <li><strong>DevOps:</strong> Vercel, Netlify, Docker, GitHub Actions</li>
+            </ul>
+          </div>
+
+          <aside aria-hidden="false">
+            <img src="/assets/about-illustration.svg" alt="Illustration representing web development" style="width:100%;max-width:320px" loading="lazy">
+          </aside>
         </div>
+      </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">My Projects</h2>
-                <p class="section-subtitle">A showcase of my recent work</p>
+    <!-- Projects -->
+    <section id="projects" class="projects" aria-labelledby="projects-title" style="padding:2rem 0">
+      <div class="container">
+        <header class="section-header">
+          <h2 id="projects-title">Selected Projects</h2>
+          <p>Recent work — click to view demo or source</p>
+        </header>
+
+        <div class="projects-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem">
+          <!-- Example project card: ideally generate these from JSON or a CMS -->
+          <article class="project-card" aria-labelledby="p1-title">
+            <img src="/assets/project-ecommerce-400.jpg" alt="Screenshot of E-commerce Platform" loading="lazy" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+            <h3 id="p1-title">E-Commerce Platform</h3>
+            <p>Full-featured store with cart, payments, and admin dashboard.</p>
+            <div style="display:flex;gap:.5rem">
+              <a href="#" aria-label="Live demo of e-commerce">Live</a>
+              <a href="#" aria-label="Source code on GitHub">Source</a>
             </div>
-            
-            <div class="projects-grid">
-                <div class="project-card" data-aos="fade-up">
-                    <div class="project-image">
-                        <img src="https://pixabay.com/get/g5f1eb5110495011cdc083a1552f0b007aa1c451bc379c2e22bb5fae9284e871396111e7183bfeac3265aa8a39398fcaeec836080ce98829dcf8148433946b4a9_1280.jpg" alt="E-Commerce Platform Project" loading="lazy">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link" aria-label="View live demo">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link" aria-label="View source code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">E-Commerce Platform</h3>
-                        <p class="project-description">
-                            A full-featured e-commerce platform with shopping cart, payment integration, 
-                            and admin dashboard. Built with modern web technologies for optimal performance.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">Node.js</span>
-                            <span class="tech-tag">MongoDB</span>
-                            <span class="tech-tag">Stripe</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-image">
-                        <img src="https://pixabay.com/get/g3730500977a9a70865f90f324971fc6fb1c958df7b997d01d975a570020c4562a253e25ab48660c46e3a622372a4cacbf13a0db1107e6698cf1cbd9d6c786ee9_1280.png" alt="Task Management App Project" loading="lazy">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link" aria-label="View live demo">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link" aria-label="View source code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Task Management App</h3>
-                        <p class="project-description">
-                            A collaborative task management application with real-time updates, 
-                            drag-and-drop functionality, and team collaboration features.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Vue.js</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">CSS Grid</span>
-                            <span class="tech-tag">PWA</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="project-image">
-                        <img src="https://pixabay.com/get/gc73dd46c80e399f1d1aea2a1c3d2816c11cef5863e87f7e5831041b0e4053105fd6c9a008549e5deac7a636b7012b7c01a50adc200f598c4085c8b6e0a279177_1280.jpg" alt="Weather Dashboard Project" loading="lazy">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link" aria-label="View live demo">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link" aria-label="View source code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Weather Dashboard</h3>
-                        <p class="project-description">
-                            An interactive weather dashboard with location-based forecasts, 
-                            data visualization, and responsive design for all devices.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Chart.js</span>
-                            <span class="tech-tag">API Integration</span>
-                            <span class="tech-tag">SCSS</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="project-image">
-                        <img src="https://pixabay.com/get/g50f940cdd4fbc1ca56100ec5ed6b74299e13adc63904bd4be01e39b789a954f933e01174fcf33ea5b01ea31cc26647ea23b0b2b73817709b3c9c76b5d1c0acc3_1280.jpg" alt="Portfolio Website Project" loading="lazy">
-                        <div class="project-overlay">
-                            <div class="project-links">
-                                <a href="#" class="project-link" aria-label="View live demo">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                                <a href="#" class="project-link" aria-label="View source code">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Creative Portfolio</h3>
-                        <p class="project-description">
-                            A creative portfolio website for a digital artist with smooth animations, 
-                            image galleries, and an integrated blog system.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML5</span>
-                            <span class="tech-tag">CSS3</span>
-                            <span class="tech-tag">Vanilla JS</span>
-                            <span class="tech-tag">GSAP</span>
-                        </div>
-                    </div>
-                </div>
+          </article>
+
+          <article class="project-card" aria-labelledby="p2-title">
+            <img src="/assets/project-tasks-400.jpg" alt="Screenshot of Task Management App" loading="lazy" style="width:100%;height:160px;object-fit:cover;border-radius:6px">
+            <h3 id="p2-title">Task Management App</h3>
+            <p>Realtime collaborative task app with drag-and-drop and PWA support.</p>
+            <div style="display:flex;gap:.5rem">
+              <a href="#" aria-label="Live demo of task app">Live</a>
+              <a href="#" aria-label="Source code on GitHub">Source</a>
             </div>
+          </article>
+
+          <!-- Add more project cards... -->
         </div>
+      </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-subtitle">Let's work together on your next project</p>
+    <!-- Contact -->
+    <section id="contact" class="contact" aria-labelledby="contact-title" style="padding:2rem 0">
+      <div class="container">
+        <header class="section-header">
+          <h2 id="contact-title">Get in touch</h2>
+          <p>I'm open to freelance work, collaborations, and full-time roles.</p>
+        </header>
+
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:1.5rem">
+          <div>
+            <form id="contact-form" action="https://formspree.io/f/xpznpqky" method="POST" novalidate>
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" required>
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required>
+
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text">
+
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" required></textarea>
+
+              <button type="submit" id="submit-btn">Send message</button>
+              <div id="form-message" role="status" aria-live="polite" style="margin-top:.5rem"></div>
+            </form>
+
+            <p style="margin-top:1rem">Or email me at: <a href="mailto:temiladeatunde[at]email[dot]com">temiladeatunde[at]email[dot]com</a></p>
+          </div>
+
+          <aside>
+            <h3>Contact details</h3>
+            <p><strong>Location:</strong> Lagos, Nigeria</p>
+            <p><strong>Phone:</strong> <a href="tel:+2349065147921">+234 90 6514 7921</a></p>
+            <div style="display:flex;gap:.5rem;margin-top:.5rem">
+              <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="#" aria-label="GitHub" title="GitHub"><i class="fab fa-github"></i></a>
+              <a href="#" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
             </div>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Let's Connect</h3>
-                    <p>
-                        I'm always interested in new opportunities and exciting projects. 
-                        Whether you have a question or just want to say hi, feel free to reach out!
-                    </p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <span class="label">Email</span>
-                                <a href="mailto:temiladeatunde@email.com">temiladeatunde@email.com</a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <span class="label">Phone</span>
-                                <a href="tel:+1234567890">+234 90 6514 7921</a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <span class="label">Location</span>
-                                <span>Lagos, Nigeria</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="contact-form-container">
-                    <form class="contact-form" id="contact-form" action="https://formspree.io/f/xpznpqky" method="POST">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" required>
-                            <span class="error-message" id="name-error"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required>
-                            <span class="error-message" id="email-error"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                            <span class="error-message" id="message-error"></span>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">
-                            <span class="btn-text">Send Message</span>
-                            <i class="fas fa-paper-plane btn-icon"></i>
-                        </button>
-                    </form>
-                    
-                    <div class="form-message" id="form-message"></div>
-                </div>
-            </div>
+          </aside>
         </div>
+      </div>
     </section>
+  </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <h3>Atunde Temilade</h3>
-                    <p>Fullstack Developer passionate about creating beautiful web experiences.</p>
-                </div>
-                
-                <div class="footer-links">
-                    <div class="footer-section">
-                        <h4>Quick Links</h4>
-                        <ul>
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#projects">Projects</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h4>Connect</h4>
-                        <div class="footer-social">
-                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Atunde Temilade. All rights reserved.</p>
-                <button class="scroll-to-top" id="scroll-to-top" aria-label="Scroll to top">
-                    <i class="fas fa-chevron-up"></i>
-                </button>
-            </div>
-        </div>
-    </footer>
+  <footer class="footer" role="contentinfo" style="padding:1.25rem 0;border-top:1px solid rgba(0,0,0,.06)">
+    <div class="container" style="display:flex;justify-content:space-between;align-items:center">
+      <small>&copy; 2026 Atunde Temilade. All rights reserved.</small>
+      <button id="scroll-to-top" aria-label="Scroll to top" style="background:none;border:0;cursor:pointer"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
+    </div>
+  </footer>
 
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+  <!-- Small inline script to provide key behaviors (move to script.js) -->
+  <script>
+    // Theme toggle (persist preference)
+    (function(){
+      const root = document.documentElement;
+      const btn = document.getElementById('theme-toggle');
+      const icon = document.getElementById('theme-icon');
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = saved || (prefersDark ? 'dark' : 'light');
+      if (initial === 'dark') root.setAttribute('data-theme','dark');
+
+      btn.addEventListener('click', () => {
+        const isDark = root.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          root.removeAttribute('data-theme');
+          localStorage.setItem('theme','light');
+          icon.className = 'fas fa-moon';
+          btn.setAttribute('aria-pressed','false');
+        } else {
+          root.setAttribute('data-theme','dark');
+          localStorage.setItem('theme','dark');
+          icon.className = 'fas fa-sun';
+          btn.setAttribute('aria-pressed','true');
+        }
+      });
+    })();
+
+    // Mobile nav toggle
+    (function(){
+      const navToggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('primary-navigation');
+      navToggle && navToggle.addEventListener('click', () => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', String(!expanded));
+        nav.style.display = expanded ? 'none' : 'flex';
+      });
+    })();
+
+    // Simple typewriter (for progressive enhancement)
+    (function(){
+      const el = document.getElementById('typewriter');
+      const words = ['Fullstack Developer','Frontend Engineer','React & Node.js','Accessible UI'];
+      let i=0, j=0, forward=true;
+      function tick(){
+        el.textContent = words[i].slice(0,j);
+        if (forward) j++; else j--;
+        if (j === words[i].length+1){ forward=false; setTimeout(tick,800); return; }
+        if (j === 0){ forward=true; i=(i+1)%words.length; }
+        setTimeout(tick,80);
+      }
+      tick();
+    })();
+
+    // Contact form: client-side validation and friendly UX
+    (function(){
+      const form = document.getElementById('contact-form');
+      const msg = document.getElementById('form-message');
+      form && form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        msg.textContent = 'Sending…';
+        const data = new FormData(form);
+        try {
+          // Try Formspree endpoint (fallback to action attribute)
+          const action = form.getAttribute('action') || window.location.href;
+          const res = await fetch(action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            msg.textContent = 'Thanks! I will get back to you soon.';
+            form.reset();
+          } else {
+            msg.textContent = 'Unexpected response — please try emailing me directly.';
+          }
+        } catch (err) {
+          msg.textContent = 'Network error — please try again later.';
+        }
+      });
+    })();
+
+    // Scroll to top
+    document.getElementById('scroll-to-top')?.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+  </script>
 </body>
 </html>
