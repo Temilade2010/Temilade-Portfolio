@@ -1,220 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Atunde Temilade — Fullstack Developer</title>
-  <meta name="description" content="Atunde Temilade — Fullstack/Frontend Developer building accessible, performant web apps.">
-  <link rel="canonical" href="https://temilade-portfolio.example.com/">
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Atunde Temilade — Fullstack Developer">
-  <meta property="og:description" content="Building accessible, performant web apps with a focus on user experience.">
-  <meta property="og:url" content="https://temilade-portfolio.example.com/">
-  <meta property="og:image" content="https://images.example.com/temilade-hero.jpg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Atunde Temilade — Fullstack Developer">
-  <meta name="twitter:description" content="Building accessible, performant web apps with a focus on user experience.">
-
-  <!-- Preconnect for fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Favicons (add your icon files to /assets) -->
-  <link rel="icon" href="/assets/favicon.ico">
-  <link rel="manifest" href="/site.webmanifest">
-
-  <!-- Font Awesome (optional, consider replacing with inline SVGs for perf) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- App CSS -->
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Atunde Temilade",
-    "url": "https://temilade-portfolio.example.com",
-    "sameAs": [
-      "https://github.com/Temilade2010",
-      "https://www.linkedin.com/in/temilade2010"
-    ],
-    "jobTitle": "Fullstack Developer",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Self-employed"
-    }
-  }
-  </script>
-</head>
-<body>
-  <!-- Skip link for accessibility -->
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- Navigation -->
-  <header class="navbar" role="banner" aria-label="Main navigation">
-    <div class="container">
-      <a class="nav-logo" href="#home" aria-label="Go to home">Atunde Temilade</a>
-
-      <nav class="nav" aria-label="Primary">
-        <button id="nav-toggle" aria-expanded="false" aria-controls="primary-navigation" class="nav-toggle" aria-label="Toggle menu">
-          <span class="bar" aria-hidden="true"></span>
-          <span class="bar" aria-hidden="true"></span>
-          <span class="bar" aria-hidden="true"></span>
-        </button>
-
-        <ul id="primary-navigation" class="nav-links" role="menubar">
-          <li role="none"><a role="menuitem" class="nav-link" href="#home">Home</a></li>
-          <li role="none"><a role="menuitem" class="nav-link" href="#about">About</a></li>
-          <li role="none"><a role="menuitem" class="nav-link" href="#projects">Projects</a></li>
-          <li role="none"><a role="menuitem" class="nav-link" href="#contact">Contact</a></li>
-          <li role="none">
-            <button id="theme-toggle" aria-pressed="false" title="Toggle dark mode" class="theme-toggle">
-              <i id="theme-icon" class="fas fa-moon" aria-hidden="true"></i>
-              <span class="sr-only">Toggle color theme</span>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main id="main" tabindex="-1">
-    <!-- Hero Section -->
-    <section id="home" class="hero" aria-labelledby="hero-title">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <h1 id="hero-title">Hi, I'm <span class="highlight">Atunde Temilade</span></h1>
-          <p class="hero-subtitle"><span id="typewriter" aria-live="polite">Fullstack Developer</span></p>
-          <p class="lead">I build accessible, responsive web applications and APIs. I focus on clean code, performance, and user experience.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">View my work</a>
-            <a class="btn btn-outline" href="#contact">Get in touch</a>
-          </div>
-        </div>
-
-        <div class="hero-media">
-          <picture>
-            <source srcset="/assets/temilade-portrait-800.webp" type="image/webp">
-            <img src="/assets/temilade-portrait-400.jpg" alt="Portrait of Atunde Temilade" loading="lazy" width="360" height="360">
-          </picture>
-        </div>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="about" aria-labelledby="about-title">
-      <div class="container">
-        <header class="section-header">
-          <h2 id="about-title">About Me</h2>
-          <p>Get to know me better</p>
-        </header>
-
-        <div class="about-grid">
-          <div>
-            <p>I'm a Fullstack Developer with a keen eye for design and a passion for building accessible, performant user experiences. I work across the stack — frontend interfaces, backend APIs, and deployment.</p>
-
-            <h3>Skills & technologies</h3>
-            <ul class="skills-list">
-              <li><strong>Frontend:</strong> HTML, CSS, JavaScript, React, Vue</li>
-              <li><strong>Backend:</strong> Node.js, Express, REST/GraphQL</li>
-              <li><strong>Storage:</strong> MongoDB, PostgreSQL</li>
-              <li><strong>DevOps:</strong> Vercel, Netlify, Docker, GitHub Actions</li>
-            </ul>
-          </div>
-
-          <aside>
-            <img src="/assets/about-illustration.svg" alt="Illustration representing web development" loading="lazy">
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="projects" aria-labelledby="projects-title">
-      <div class="container">
-        <header class="section-header">
-          <h2 id="projects-title">Selected Projects</h2>
-          <p>Recent work — click to view demo or source</p>
-        </header>
-
-        <div class="projects-grid">
-          <article class="project-card" aria-labelledby="p1-title">
-            <img src="/assets/project-ecommerce-400.jpg" alt="Screenshot of E-commerce Platform" loading="lazy">
-            <h3 id="p1-title">E-Commerce Platform</h3>
-            <p>Full-featured store with cart, payments, and admin dashboard.</p>
-            <div class="project-links">
-              <a href="#" aria-label="Live demo of e-commerce" class="link">Live</a>
-              <a href="#" aria-label="Source code on GitHub" class="link">Source</a>
-            </div>
-          </article>
-
-          <article class="project-card" aria-labelledby="p2-title">
-            <img src="/assets/project-tasks-400.jpg" alt="Screenshot of Task Management App" loading="lazy">
-            <h3 id="p2-title">Task Management App</h3>
-            <p>Realtime collaborative task app with drag-and-drop and PWA support.</p>
-            <div class="project-links">
-              <a href="#" aria-label="Live demo of task app" class="link">Live</a>
-              <a href="#" aria-label="Source code on GitHub" class="link">Source</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="contact" aria-labelledby="contact-title">
-      <div class="container contact-grid">
-        <header class="section-header">
-          <h2 id="contact-title">Get in touch</h2>
-          <p>I'm open to freelance work, collaborations, and full-time roles.</p>
-        </header>
-
-        <div class="contact-panel">
-          <form id="contact-form" action="https://formspree.io/f/xpznpqky" method="POST" novalidate>
-            <label for="name">Full name</label>
-            <input id="name" name="name" type="text" required>
-
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required>
-
-            <label for="subject">Subject</label>
-            <input id="subject" name="subject" type="text">
-
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="6" required></textarea>
-
-            <button type="submit" id="submit-btn" class="btn btn-primary">Send message</button>
-            <div id="form-message" role="status" aria-live="polite" class="form-message"></div>
-          </form>
-
-          <aside class="contact-aside">
-            <h3>Contact details</h3>
-            <p><strong>Location:</strong> Lagos, Nigeria</p>
-            <p><strong>Phone:</strong> <a href="tel:+2349065147921">+234 90 6514 7921</a></p>
-            <div class="social-icons">
-              <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-              <a href="#" aria-label="GitHub" title="GitHub"><i class="fab fa-github"></i></a>
-              <a href="#" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer" role="contentinfo">
-    <div class="container footer-inner">
-      <small>&copy; 2026 Atunde Temilade. All rights reserved.</small>
-      <button id="scroll-to-top" aria-label="Scroll to top" class="scroll-to-top"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
-    </div>
-  </footer>
-
-  <script src="script.js" defer></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/jpeg" href="/temilade-profile.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temilade Atunde - Software Engineer</title>
+    <meta name="description" content="Software Engineer passionate about building reliable, user-focused software. I enjoy turning ideas into clean codes - Temilade Atunde" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-white text-black antialiased font-sans selection:bg-zinc-200">
+    <svg style="display:none">
+      <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+        <feTurbulence type="fractalNoise" baseFrequency=".05 .05" numOctaves="1" seed="10" result="turbulence"></feTurbulence>
+        <feComponentTransfer in="turbulence" result="mapped">
+          <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5"></feFuncR>
+          <feFuncG type="gamma" amplitude="0" exponent="1" offset="0"></feFuncG>
+          <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5"></feFuncB>
+        </feComponentTransfer>
+        <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage"></feComposite>
+        <feDisplacementMap in="SourceGraphic" in2="softMap" scale="30" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+      </filter>
+    </svg>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
