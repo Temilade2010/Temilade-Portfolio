@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -10,9 +10,36 @@ import { HelpBanner } from './components/HelpBanner';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { BlogModal } from './components/BlogModal';
+import { CommandPalette } from './components/CommandPalette';
+import { sounds } from './utils/soundEffects';
 
 export const App: React.FC = () => {
   const [isBlogOpen, setIsBlogOpen] = useState(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+
+  // Global keyboard shortcut listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger if typing in an input or textarea
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+        return;
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        sounds.playPop();
+        setIsCommandPaletteOpen((prev) => !prev);
+      } else if (e.key.toLowerCase() === 'b' && !isBlogOpen && !isCommandPaletteOpen) {
+        // Press B for Blog
+        sounds.playPop();
+        setIsBlogOpen(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isBlogOpen, isCommandPaletteOpen]);
 
   return (
     <div className="min-h-screen bg-white text-black relative selection:bg-zinc-200">
@@ -21,7 +48,7 @@ export const App: React.FC = () => {
         <div className="w-full h-full bg-grabient rounded-full transform -translate-y-1/3"></div>
       </div>
 
-      {/* Background Frame Guidelines (Exact signature feature of original site) */}
+      {/* Background Frame Guidelines */}
       <div className="fixed top-0 bottom-0 w-full pointer-events-none z-0">
         <div className="relative mx-auto max-w-[53rem] h-full">
           <div className="absolute left-0 top-0 h-screen w-[1px] bg-[#0000000f] md:bg-[#0000001a]"></div>
@@ -30,11 +57,17 @@ export const App: React.FC = () => {
       </div>
 
       {/* Floating Liquid Glass Header */}
-      <Navbar onBlogClick={() => setIsBlogOpen(true)} />
+      <Navbar
+        onBlogClick={() => setIsBlogOpen(true)}
+        onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+      />
 
       {/* Main Page Layout */}
       <main className="flex flex-col relative items-center mx-auto z-10 w-full overflow-x-hidden">
-        <Hero />
+        <Hero
+          onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
+          onOpenBlog={() => setIsBlogOpen(true)}
+        />
         <About />
         <TechStack />
         <Projects />
@@ -45,8 +78,15 @@ export const App: React.FC = () => {
         <Footer />
       </main>
 
-      {/* Blog Modal */}
+      {/* Interactive Blog System */}
       <BlogModal isOpen={isBlogOpen} onClose={() => setIsBlogOpen(false)} />
+
+      {/* Command Palette Quick Launcher */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onOpenBlog={() => setIsBlogOpen(true)}
+      />
     </div>
   );
 };

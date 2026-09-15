@@ -2,26 +2,30 @@ import React from 'react';
 
 export const About: React.FC = () => {
   return (
-    <div className="w-full max-w-[53rem] flex flex-col py-[60px] md:py-[90px] px-[1.5rem] md:px-[6rem] items-start gap-[25px]">
+    <div id="about" className="w-full max-w-[53rem] flex flex-col py-[50px] md:py-[80px] px-[1.5rem] md:px-[6rem] items-start gap-[25px]">
+      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold tracking-wide uppercase bg-zinc-100 text-zinc-700 border border-zinc-200">
+        <span>About The Engineer</span>
+      </div>
+
       <h2 className="text-[25px] md:text-[32px] font-bold tracking-[-0.03em] leading-[110%] text-black">
-        About Me
+        Engineering Philosophy & Background
       </h2>
 
-      <div className="flex flex-col gap-6 text-[#5a5a5a] text-[16px] font-normal leading-[1.6]">
+      <div className="flex flex-col gap-6 text-[#5a5a5a] text-[15px] md:text-[16px] font-normal leading-[1.6]">
         <p>
           I'm a Software Engineer passionate about building reliable, user-focused software.
           I love transforming complex concepts and creative visions into clean, maintainable, and high-performance digital products.
         </p>
 
         <p>
-          I'm <strong className="text-zinc-900 font-semibold">Temilade Atunde</strong>, an undergraduate <strong className="text-zinc-900 font-semibold">Computer Science</strong> student at <strong className="text-zinc-900 font-semibold">Redeemer's University</strong> (Class of 2026) based in Lagos, Nigeria.
+          I'm <strong className="text-zinc-900 font-semibold">Temilade Atunde</strong>, an undergraduate <strong className="text-zinc-900 font-semibold">Computer Science</strong> student at <strong className="text-zinc-900 font-semibold">Redeemer's University</strong> (entered in 2026, completing a 4-year degree as Class of 2030) based in Lagos, Nigeria.
           I started coding in 2023, and since then I've been dedicated to mastering software systems—engineering cross-platform mobile applications with
-          <strong className="text-zinc-900 font-semibold"> Flutter</strong> and Appwrite, responsive web apps with React & Next.js, and high-performance backends using
-          <strong className="text-zinc-900 font-semibold"> Node.js, Express, Python, Java, C++, C#, and Go</strong>.
+          <strong className="text-zinc-900 font-semibold"> Flutter</strong> and Appwrite, responsive web applications, and high-performance backends using
+          <strong className="text-zinc-900 font-semibold"> Go, Java, C++, C#, Python, and Node.js</strong>.
         </p>
 
         <p>
-          I am currently actively collaborating on{" "}
+          I am currently an active collaborator on{" "}
           <a
             href="https://github.com/odulanaprogress/ScholeOS"
             target="_blank"
@@ -30,7 +34,7 @@ export const About: React.FC = () => {
           >
             ScholeOs
           </a>
-          , an open-source educational platform and school management operating system on GitHub. Alongside this, I run <strong className="text-zinc-900 font-semibold">Temicode</strong>, where I develop digital products and experiment with cutting-edge developer tooling.
+          , an open-source educational platform and school management operating system on GitHub. Alongside this, I run <strong className="text-zinc-900 font-semibold">Temicode</strong>, where I build developer productivity tools, experiment with systems algorithms, and design digital solutions like CampusPulse.
         </p>
 
         {/* Polaroid Cards Stack featuring Temilade's photos */}
