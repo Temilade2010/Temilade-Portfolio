@@ -1,32 +1,42 @@
-# React + TypeScript + Vite
+# Temilade Atunde — Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A personal portfolio website built with **React**, **JavaScript**, and **Tailwind CSS**, powered by **Vite**.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Modern Glassmorphism UI**: Frosted glass navigation, cards, badges, and modals with backdrop blur.
+- **Infinite Marquee**: Stylish `</Temilade>` marquee with glowing code accents.
+- **Featured Projects**: Direct links to GitHub repositories and live demos (ScholeOs, Notes App, SkyFlow Weather, Task Tracker, CampusPulse).
+- **Realistic Tech Stack**: Focused overview of Flutter, Dart, React, JavaScript, Node.js, Python, Appwrite, and databases.
+- **Interactive Engineering Journal**: Modal reader with bookmarks, claps, code snippet copying, and comments.
+- **Sound Effects**: Subtle Web Audio API synthesis for UI micro-interactions.
+- **Command Palette (`⌘K`)**: Quick launcher to jump across sections and social links.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React 19, JavaScript (ES6+), Tailwind CSS
+- **Icons**: Lucide Icons & Custom SVGs
+- **Build Tool**: Vite
+- **FX**: Web Audio API Synthesizer, Canvas Confetti
 
-## Expanding the Oxlint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+```bash
+# Install dependencies
+npm install
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview build
+npm run preview
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 📱 Connect
+
+- **Instagram**: [@temi.code](https://www.instagram.com/temi.code/)
+- **GitHub**: [@Temilade2010](https://github.com/Temilade2010)
+- **Email**: [temiladeatunde@gmail.com](mailto:temiladeatunde@gmail.com)

@@ -1,14 +1,25 @@
-import React from 'react';
 import { Mail } from 'lucide-react';
+import { InstagramIcon } from './InstagramIcon';
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
   return (
-    <footer className="w-full max-w-[53rem] py-[40px] px-6 flex flex-col items-center gap-[16px] border-t border-[#E5E5E5] mt-10">
+    <footer className="w-full max-w-[53rem] py-[40px] px-6 flex flex-col items-center gap-[16px] border-t border-zinc-200/80 mt-10">
       <p className="text-[14px] text-center text-[#5a5a5a] font-normal">
-        © MMXXVI · Temilade Atunde · All rights reserved
+        © MMXXVI · Temilade Atunde · Built with React & JavaScript
       </p>
 
       <div className="flex items-center gap-6 py-1">
+        {/* Instagram */}
+        <a
+          href="https://www.instagram.com/temi.code/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#5a5a5a] hover:text-pink-600 transition-all duration-200 hover:scale-110"
+          aria-label="Instagram @temi.code"
+        >
+          <InstagramIcon className="w-4 h-4" />
+        </a>
+
         {/* GitHub */}
         <a
           href="https://github.com/Temilade2010"

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
-export const InteractiveCanvas: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+export const InteractiveCanvas = () => {
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -10,7 +10,7 @@ export const InteractiveCanvas: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId;
     let width = (canvas.width = canvas.offsetWidth);
     let height = (canvas.height = canvas.offsetHeight);
 
@@ -27,7 +27,7 @@ export const InteractiveCanvas: React.FC = () => {
     let targetMouseX = width / 2;
     let targetMouseY = height / 2;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e) => {
       const rect = canvas.getBoundingClientRect();
       targetMouseX = e.clientX - rect.left;
       targetMouseY = e.clientY - rect.top;
@@ -88,10 +88,10 @@ export const InteractiveCanvas: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-[53rem] flex flex-col items-start my-8">
+    <div className="w-full max-w-[53rem] flex flex-col items-start my-6">
       <section
-        className="relative w-full hidden md:flex overflow-hidden rounded-2xl bg-zinc-50/50 border border-black/[0.04]"
-        style={{ height: '35vh', minHeight: '220px' }}
+        className="relative w-full hidden md:flex overflow-hidden rounded-2xl bg-white/40 backdrop-blur-md border border-zinc-200/60 shadow-2xs"
+        style={{ height: '30vh', minHeight: '200px' }}
       >
         <canvas
           ref={canvasRef}

@@ -9,45 +9,22 @@ import {
   Bookmark,
   Share2,
   Check,
-  Sparkles,
   BookOpen,
-  MessageSquare,
-  Send,
-  Code2
 } from 'lucide-react';
-import { blogArticles, type BlogArticle } from '../data/portfolioData';
-import { sounds } from '../utils/soundEffects';
+import { blogArticles } from '../data/portfolioData';
 
-interface BlogModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-interface CommentItem {
-  id: string;
-  articleId: string;
-  author: string;
-  text: string;
-  timestamp: string;
-}
-
-export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
-  const [selectedArticle, setSelectedArticle] = useState<BlogArticle | null>(null);
+export const BlogModal = ({ isOpen, onClose }) => {
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [clapsMap, setClapsMap] = useState<Record<string, number>>({});
-  const [bookmarkedIds, setBookmarkedIds] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [clapsMap, setClapsMap] = useState({});
+  const [bookmarkedIds, setBookmarkedIds] = useState([]);
   const [showOnlyBookmarked, setShowOnlyBookmarked] = useState(false);
   const [copiedNotification, setCopiedNotification] = useState(false);
-  const [codeCopiedIndex, setCodeCopiedIndex] = useState<number | null>(null);
+  const [codeCopiedIndex, setCodeCopiedIndex] = useState(null);
   const [readProgress, setReadProgress] = useState(0);
 
-  // Quick comments
-  const [comments, setComments] = useState<CommentItem[]>([]);
-  const [commentAuthor, setCommentAuthor] = useState('');
-  const [commentText, setCommentText] = useState('');
-
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef(null);
 
   // Initialize from LocalStorage
   useEffect(() => {
@@ -58,7 +35,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
       if (savedClaps) {
         setClapsMap(JSON.parse(savedClaps));
       } else {
-        const initialClaps: Record<string, number> = {};
+        const initialClaps = {};
         blogArticles.forEach((a) => {
           initialClaps[a.id] = a.claps;
         });
@@ -68,28 +45,6 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
       const savedBookmarks = localStorage.getItem('temilade_blog_bookmarks');
       if (savedBookmarks) {
         setBookmarkedIds(JSON.parse(savedBookmarks));
-      }
-
-      const savedComments = localStorage.getItem('temilade_blog_comments');
-      if (savedComments) {
-        setComments(JSON.parse(savedComments));
-      } else {
-        setComments([
-          {
-            id: 'c1',
-            articleId: 'flutter-appwrite-architecture',
-            author: 'Alex M.',
-            text: 'The Riverpod pattern with Appwrite realtime is super clean! Thanks for sharing this.',
-            timestamp: '3 days ago',
-          },
-          {
-            id: 'c2',
-            articleId: 'redeemers-university-journey',
-            author: 'RUN Colleague',
-            text: 'Proud to see a Redeemer’s University student pushing high engineering standards!',
-            timestamp: '1 week ago',
-          },
-        ]);
       }
     } catch {
       // LocalStorage access error
@@ -118,8 +73,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
     return matchesCategory && matchesSearch && matchesBookmark;
   });
 
-  const handleClap = (articleId: string) => {
-    sounds.playClap();
+  const handleClap = (articleId) => {
     setClapsMap((prev) => {
       const next = { ...prev, [articleId]: (prev[articleId] || 0) + 1 };
       localStorage.setItem('temilade_blog_claps', JSON.stringify(next));
@@ -127,8 +81,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
     });
   };
 
-  const toggleBookmark = (articleId: string) => {
-    sounds.playPop();
+  const toggleBookmark = (articleId) => {
     setBookmarkedIds((prev) => {
       const exists = prev.includes(articleId);
       const next = exists ? prev.filter((id) => id !== articleId) : [...prev, articleId];
@@ -137,8 +90,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
     });
   };
 
-  const handleShare = (article: BlogArticle) => {
-    sounds.playClick();
+  const handleShare = (article) => {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(
         `${window.location.origin}?article=${article.slug} - "${article.title}" by Temilade Atunde`
@@ -148,37 +100,13 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleCopyCode = (code: string, index: number) => {
-    sounds.playClick();
+  const handleCopyCode = (code, index) => {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(code);
       setCodeCopiedIndex(index);
       setTimeout(() => setCodeCopiedIndex(null), 2000);
     }
   };
-
-  const handleAddComment = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedArticle || !commentText.trim()) return;
-
-    sounds.playPop();
-    const newComment: CommentItem = {
-      id: Date.now().toString(),
-      articleId: selectedArticle.id,
-      author: commentAuthor.trim() || 'Fellow Developer',
-      text: commentText.trim(),
-      timestamp: 'Just now',
-    };
-
-    const nextComments = [newComment, ...comments];
-    setComments(nextComments);
-    localStorage.setItem('temilade_blog_comments', JSON.stringify(nextComments));
-    setCommentText('');
-  };
-
-  const activeComments = selectedArticle
-    ? comments.filter((c) => c.articleId === selectedArticle.id)
-    : [];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 bg-black/70 backdrop-blur-md animate-fade-in-up">
@@ -190,7 +118,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
         </div>
       )}
 
-      <div className="bg-white rounded-[24px] max-w-2xl w-full shadow-2xl border border-zinc-200 relative max-h-[92vh] flex flex-col overflow-hidden">
+      <div className="bg-white/95 backdrop-blur-2xl rounded-[24px] max-w-2xl w-full shadow-2xl border border-zinc-200 relative max-h-[92vh] flex flex-col overflow-hidden">
         {/* Reading Progress Line */}
         {selectedArticle && (
           <div className="h-1 w-full bg-zinc-100 relative">
@@ -206,10 +134,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
           <div className="flex items-center gap-2">
             {selectedArticle ? (
               <button
-                onClick={() => {
-                  sounds.playClick();
-                  setSelectedArticle(null);
-                }}
+                onClick={() => setSelectedArticle(null)}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 text-xs font-semibold transition-all mr-2"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
@@ -222,12 +147,12 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
             )}
             <div>
               <h3 className="text-lg md:text-xl font-bold text-zinc-950 tracking-tight leading-none">
-                {selectedArticle ? selectedArticle.category : "Temilade's Engineering Journal"}
+                {selectedArticle ? selectedArticle.category : "Engineering Journal"}
               </h3>
               <p className="text-xs text-zinc-500 mt-1">
                 {selectedArticle
                   ? `${selectedArticle.readTime} · ${selectedArticle.date}`
-                  : 'Thoughts on mobile engineering, systems architectures & university life'}
+                  : 'Practical thoughts on mobile engineering, web development & university life'}
               </p>
             </div>
           </div>
@@ -257,10 +182,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
             )}
 
             <button
-              onClick={() => {
-                sounds.playClick();
-                onClose();
-              }}
+              onClick={onClose}
               className="p-2 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 rounded-xl transition-all ml-1"
               aria-label="Close modal"
             >
@@ -273,25 +195,24 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="overflow-y-auto flex-1 p-6 md:p-8"
+          className="p-6 overflow-y-auto flex-1 text-zinc-800"
         >
           {selectedArticle ? (
             /* =========================================================
-               READER VIEW
+               ARTICLE READER VIEW
                ========================================================= */
-            <article className="max-w-prose mx-auto flex flex-col gap-6">
-              {/* Article Header */}
+            <article className="max-w-xl mx-auto flex flex-col gap-6 py-2">
               <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-100">
+                <div className="flex items-center gap-2 text-xs font-semibold text-zinc-500 mb-2">
+                  <span className="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700">
                     {selectedArticle.tag}
                   </span>
-                  <span className="text-xs text-zinc-400">·</span>
-                  <span className="text-xs text-zinc-500 flex items-center gap-1">
+                  <span>·</span>
+                  <span className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" /> {selectedArticle.date}
                   </span>
-                  <span className="text-xs text-zinc-400">·</span>
-                  <span className="text-xs text-zinc-500 flex items-center gap-1">
+                  <span>·</span>
+                  <span className="flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5" /> {selectedArticle.readTime}
                   </span>
                 </div>
@@ -301,47 +222,45 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
                 </h1>
               </div>
 
-              {/* Key Takeaways Box */}
-              <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200/80">
-                <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zinc-600 mb-2">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Key Architectural Takeaways</span>
+              {/* Takeaways Card */}
+              {selectedArticle.takeaways && (
+                <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200/80">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-600 mb-2">
+                    Key Highlights
+                  </h4>
+                  <ul className="space-y-1.5">
+                    {selectedArticle.takeaways.map((point, idx) => (
+                      <li key={idx} className="text-xs md:text-sm text-zinc-700 flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 flex-shrink-0" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-1.5 text-xs md:text-sm text-zinc-700">
-                  {selectedArticle.takeaways.map((point, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 flex-shrink-0"></span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              )}
 
-              {/* Intro Body */}
-              <p className="text-base text-zinc-700 leading-relaxed font-normal">
+              {/* Intro */}
+              <p className="text-sm md:text-base text-zinc-700 leading-relaxed font-normal">
                 {selectedArticle.content.intro}
               </p>
 
               {/* Sections */}
-              {selectedArticle.content.sections.map((section, idx) => (
-                <div key={idx} className="flex flex-col gap-3">
-                  <h3 className="text-lg md:text-xl font-bold text-zinc-900 tracking-tight">
-                    {section.heading}
+              {selectedArticle.content.sections.map((sec, idx) => (
+                <div key={idx} className="flex flex-col gap-2">
+                  <h3 className="text-lg font-bold text-zinc-950 tracking-tight">
+                    {sec.heading}
                   </h3>
-                  <p className="text-sm md:text-base text-zinc-700 leading-relaxed">
-                    {section.body}
+                  <p className="text-sm md:text-base text-zinc-600 leading-relaxed">
+                    {sec.body}
                   </p>
 
-                  {/* Code Snippet */}
-                  {section.codeSnippet && (
-                    <div className="my-2 rounded-xl overflow-hidden border border-zinc-800 bg-[#0d1117] text-zinc-100 shadow-md">
-                      <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-zinc-800 text-xs text-zinc-400 font-mono">
-                        <div className="flex items-center gap-2">
-                          <Code2 className="w-3.5 h-3.5 text-blue-400" />
-                          <span>{section.codeSnippet.language}</span>
-                        </div>
+                  {/* Optional Code Snippet block if present */}
+                  {sec.codeSnippet && (
+                    <div className="mt-2 rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 text-white">
+                      <div className="px-4 py-2 bg-zinc-900 border-b border-zinc-800 flex items-center justify-between text-xs text-zinc-400 font-mono">
+                        <span>{sec.codeSnippet.lang || 'code'}</span>
                         <button
-                          onClick={() => handleCopyCode(section.codeSnippet!.code, idx)}
+                          onClick={() => handleCopyCode(sec.codeSnippet.code, idx)}
                           className="flex items-center gap-1 hover:text-white px-2 py-0.5 rounded bg-zinc-800/80 transition-colors"
                         >
                           {codeCopiedIndex === idx ? (
@@ -355,7 +274,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
                         </button>
                       </div>
                       <pre className="p-4 text-xs md:text-sm font-mono overflow-x-auto text-emerald-300 leading-relaxed">
-                        <code>{section.codeSnippet.code}</code>
+                        <code>{sec.codeSnippet.code}</code>
                       </pre>
                     </div>
                   )}
@@ -387,63 +306,6 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
                   </span>
                 </div>
               </div>
-
-              {/* Comments / Quick Thoughts Section */}
-              <div className="mt-4 flex flex-col gap-4">
-                <div className="flex items-center gap-2">
-                  <MessageSquare className="w-4 h-4 text-zinc-600" />
-                  <h4 className="text-sm font-bold text-zinc-900">
-                    Thoughts & Discussion ({activeComments.length})
-                  </h4>
-                </div>
-
-                {/* Comment Form */}
-                <form onSubmit={handleAddComment} className="flex flex-col gap-2.5">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    <input
-                      type="text"
-                      placeholder="Your name (optional)"
-                      value={commentAuthor}
-                      onChange={(e) => setCommentAuthor(e.target.value)}
-                      className="px-3 py-2 rounded-xl border border-zinc-200 text-xs bg-zinc-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-zinc-800"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Leave a quick note or question..."
-                      value={commentText}
-                      onChange={(e) => setCommentText(e.target.value)}
-                      required
-                      className="sm:col-span-2 px-3 py-2 rounded-xl border border-zinc-200 text-xs bg-zinc-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-zinc-800"
-                    />
-                  </div>
-                  <div className="flex justify-end">
-                    <button
-                      type="submit"
-                      className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold transition-all shadow-sm active:scale-95"
-                    >
-                      <span>Post Note</span>
-                      <Send className="w-3 h-3" />
-                    </button>
-                  </div>
-                </form>
-
-                {/* Comment List */}
-                <div className="space-y-2 mt-2">
-                  {activeComments.length === 0 ? (
-                    <p className="text-xs text-zinc-400 italic">No notes yet. Be the first to chime in!</p>
-                  ) : (
-                    activeComments.map((c) => (
-                      <div key={c.id} className="p-3 rounded-xl bg-zinc-50 border border-zinc-100 flex flex-col gap-1">
-                        <div className="flex items-center justify-between text-[11px]">
-                          <span className="font-semibold text-zinc-800">{c.author}</span>
-                          <span className="text-zinc-400">{c.timestamp}</span>
-                        </div>
-                        <p className="text-xs text-zinc-600 leading-relaxed">{c.text}</p>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
             </article>
           ) : (
             /* =========================================================
@@ -458,7 +320,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search articles by keyword, topic, or tech..."
+                    placeholder="Search articles by keyword or topic..."
                     className="w-full pl-9 pr-4 py-2 rounded-xl border border-zinc-200 text-xs md:text-sm bg-zinc-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-600/20"
                   />
                   {searchQuery && (
@@ -472,10 +334,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
                 </div>
 
                 <button
-                  onClick={() => {
-                    sounds.playClick();
-                    setShowOnlyBookmarked(!showOnlyBookmarked);
-                  }}
+                  onClick={() => setShowOnlyBookmarked(!showOnlyBookmarked)}
                   className={`flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border text-xs font-semibold transition-all ${
                     showOnlyBookmarked
                       ? 'bg-amber-50 border-amber-200 text-amber-700'
@@ -489,13 +348,10 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
 
               {/* Category Pills */}
               <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-                {['All', 'Flutter', 'TypeScript', 'Systems', 'Education'].map((cat) => (
+                {['All', 'React Native', 'University', 'Open Source'].map((cat) => (
                   <button
                     key={cat}
-                    onClick={() => {
-                      sounds.playClick();
-                      setSelectedCategory(cat);
-                    }}
+                    onClick={() => setSelectedCategory(cat)}
                     className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                       selectedCategory === cat
                         ? 'bg-zinc-900 text-white'
@@ -518,10 +374,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
                   filteredArticles.map((art) => (
                     <article
                       key={art.id}
-                      onClick={() => {
-                        sounds.playPop();
-                        setSelectedArticle(art);
-                      }}
+                      onClick={() => setSelectedArticle(art)}
                       className="py-4 group cursor-pointer hover:bg-zinc-50/80 -mx-3 px-3 rounded-2xl transition-all"
                     >
                       <div className="flex items-center justify-between mb-1.5">
@@ -531,11 +384,11 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
                           </span>
                           <span>·</span>
                           <span className="flex items-center gap-1">
-                            <Calendar className="w-3 h-3" /> {art.date}
+                            <Calendar className="w-3.5 h-3.5" /> {art.date}
                           </span>
                           <span>·</span>
                           <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3" /> {art.readTime}
+                            <Clock className="w-3.5 h-3.5" /> {art.readTime}
                           </span>
                         </div>
 
@@ -568,7 +421,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
                           <span>{clapsMap[art.id] || art.claps} claps</span>
                         </div>
                         <span className="font-semibold text-blue-600 group-hover:translate-x-1 transition-transform flex items-center gap-0.5">
-                          Read full article &rarr;
+                          Read article &rarr;
                         </span>
                       </div>
                     </article>
@@ -583,10 +436,7 @@ export const BlogModal: React.FC<BlogModalProps> = ({ isOpen, onClose }) => {
         <div className="px-6 py-3 border-t border-zinc-100 bg-zinc-50/50 flex justify-between items-center text-xs text-zinc-400 z-10">
           <span>Temilade Atunde · Redeemer's University '30</span>
           <button
-            onClick={() => {
-              sounds.playClick();
-              onClose();
-            }}
+            onClick={onClose}
             className="px-4 py-1.5 rounded-xl bg-zinc-900 text-white font-medium hover:bg-zinc-800 transition-all"
           >
             Close

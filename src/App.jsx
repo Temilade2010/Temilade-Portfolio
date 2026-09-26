@@ -4,35 +4,30 @@ import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { TechStack } from './components/TechStack';
 import { Projects } from './components/Projects';
-import { InteractiveCanvas } from './components/InteractiveCanvas';
 import { Experience } from './components/Experience';
-import { HelpBanner } from './components/HelpBanner';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { BlogModal } from './components/BlogModal';
 import { CommandPalette } from './components/CommandPalette';
-import { sounds } from './utils/soundEffects';
 
-export const App: React.FC = () => {
+export const App = () => {
   const [isBlogOpen, setIsBlogOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   // Global keyboard shortcut listener
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e) => {
       // Don't trigger if typing in an input or textarea
-      const target = e.target as HTMLElement;
+      const target = e.target;
       if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
         return;
       }
 
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        sounds.playPop();
         setIsCommandPaletteOpen((prev) => !prev);
       } else if (e.key.toLowerCase() === 'b' && !isBlogOpen && !isCommandPaletteOpen) {
         // Press B for Blog
-        sounds.playPop();
         setIsBlogOpen(true);
       }
     };
@@ -42,17 +37,17 @@ export const App: React.FC = () => {
   }, [isBlogOpen, isCommandPaletteOpen]);
 
   return (
-    <div className="min-h-screen bg-white text-black relative selection:bg-zinc-200">
-      {/* Grabient Ambient Aura (Baby blue -> Lavender -> Powder pink) */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[64rem] h-[520px] pointer-events-none z-0 opacity-40 blur-[100px] overflow-hidden">
+    <div className="min-h-screen bg-[#fafafa] text-black relative selection:bg-zinc-200">
+      {/* Ambient Aura Background */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[64rem] h-[520px] pointer-events-none z-0 opacity-30 blur-[100px] overflow-hidden">
         <div className="w-full h-full bg-grabient rounded-full transform -translate-y-1/3"></div>
       </div>
 
-      {/* Background Frame Guidelines */}
+      {/* Subtle Background Frame Guidelines */}
       <div className="fixed top-0 bottom-0 w-full pointer-events-none z-0">
         <div className="relative mx-auto max-w-[53rem] h-full">
-          <div className="absolute left-0 top-0 h-screen w-[1px] bg-[#0000000f] md:bg-[#0000001a]"></div>
-          <div className="absolute right-0 top-0 h-screen w-[1px] bg-[#0000000f] md:bg-[#0000001a]"></div>
+          <div className="absolute left-0 top-0 h-screen w-[1px] bg-[#0000000a] md:bg-[#00000014]"></div>
+          <div className="absolute right-0 top-0 h-screen w-[1px] bg-[#0000000a] md:bg-[#00000014]"></div>
         </div>
       </div>
 
@@ -71,9 +66,7 @@ export const App: React.FC = () => {
         <About />
         <TechStack />
         <Projects />
-        <InteractiveCanvas />
         <Experience />
-        <HelpBanner />
         <Contact />
         <Footer />
       </main>
@@ -92,3 +85,4 @@ export const App: React.FC = () => {
 };
 
 export default App;
+

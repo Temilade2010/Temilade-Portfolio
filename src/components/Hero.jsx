@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Sparkles, Command, ArrowDown } from 'lucide-react';
-import { sounds } from '../utils/soundEffects';
 
-interface HeroProps {
-  onOpenCommandPalette?: () => void;
-  onOpenBlog?: () => void;
-}
-
-export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette, onOpenBlog }) => {
+export const Hero = ({ onOpenCommandPalette, onOpenBlog }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -19,7 +13,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette, onOpenBlog }) 
   const roleWords = ["Software", "Engineer"];
 
   return (
-    <div className="w-full max-w-[53rem] flex flex-col pt-[130px] md:pt-[170px] pb-[2rem] md:pb-[3rem] px-[1.5rem] md:px-[6rem] items-start gap-[22px]">
+    <div className="w-full max-w-[53rem] flex flex-col pt-[130px] md:pt-[170px] pb-[1.5rem] md:pb-[2.5rem] px-[1.5rem] md:px-[6rem] items-start gap-[22px]">
       {/* Top Status Badge & Profile Picture */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 w-full justify-between">
         {/* Profile Picture */}
@@ -32,9 +26,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette, onOpenBlog }) 
             <img
               src="/temilade-profile.jpg"
               alt="Temilade Atunde Profile"
-              className="w-[88px] h-[88px] md:w-[100px] md:h-[100px] rounded-full object-cover aspect-square ring-2 ring-black/5 shadow-lg transition-transform duration-500 group-hover:scale-105"
+              className="w-[88px] h-[88px] md:w-[100px] md:h-[100px] rounded-full object-cover aspect-square ring-2 ring-black/5 shadow-md transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-black/10 pointer-events-none"></div>
           </div>
         </div>
 
@@ -44,7 +37,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette, onOpenBlog }) 
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50/90 border border-emerald-200/80 text-emerald-800 text-xs font-semibold shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50/90 border border-emerald-200/80 text-emerald-800 text-xs font-semibold shadow-2xs backdrop-blur-md">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -54,11 +47,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette, onOpenBlog }) 
 
           {onOpenCommandPalette && (
             <button
-              onClick={() => {
-                sounds.playPop();
-                onOpenCommandPalette();
-              }}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 border border-zinc-200 text-xs font-semibold transition-all shadow-2xs group"
+              onClick={onOpenCommandPalette}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/80 hover:bg-white text-zinc-700 border border-zinc-200/80 text-xs font-semibold transition-all shadow-2xs group backdrop-blur-md"
               title="Open Command Palette (Cmd + K)"
             >
               <Command className="w-3.5 h-3.5 text-zinc-500 group-hover:text-zinc-900" />
@@ -98,14 +88,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette, onOpenBlog }) 
           ))}
         </h2>
 
-        {/* Subtitle with Redeemer's University 2030 */}
+        {/* Human, authentic subtitle without AI buzzwords */}
         <p 
-          className={`text-[15px] md:text-[16px] text-[#5a5a5a] text-start mt-[20px] leading-relaxed transition-all duration-700 delay-700 ${
+          className={`text-[15px] md:text-[16px] text-[#5a5a5a] text-start mt-[18px] leading-relaxed transition-all duration-700 delay-700 ${
             isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}
         >
-          Software Engineer crafting reliable, high-performance systems.<br className="hidden md:block" />
-          Coding since 2023 · Computer Science at Redeemer's University ('30) · Flutter · Go · Java · C++ · C# · TypeScript · Node.js · Python.
+          Computer Science undergraduate at Redeemer's University ('30) · Coding since 2023.<br className="hidden md:block" />
+          Building cross-platform mobile apps with React Native, responsive web apps with React & JavaScript, and contributing to open-source software.
         </p>
 
         {/* Quick CTA Actions */}
@@ -116,23 +106,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCommandPalette, onOpenBlog }) 
         >
           <a
             href="#projects"
-            onClick={() => sounds.playClick()}
             className="inline-flex items-center gap-2 bg-zinc-950 hover:bg-zinc-800 active:scale-95 text-white px-5 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all shadow-sm"
           >
-            <span>Explore Projects & Roadmap</span>
+            <span>Explore Projects & Demos</span>
             <ArrowDown className="w-3.5 h-3.5" />
           </a>
 
           {onOpenBlog && (
             <button
-              onClick={() => {
-                sounds.playPop();
-                onOpenBlog();
-              }}
-              className="inline-flex items-center gap-2 bg-zinc-100 hover:bg-zinc-200 active:scale-95 text-zinc-900 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all border border-zinc-200/80"
+              onClick={onOpenBlog}
+              className="inline-flex items-center gap-2 bg-white/80 hover:bg-white active:scale-95 text-zinc-900 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all border border-zinc-200/80 shadow-2xs backdrop-blur-md"
             >
               <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              <span>Read Engineering Journal</span>
+              <span>Read My Articles</span>
             </button>
           )}
         </div>
